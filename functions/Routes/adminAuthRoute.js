@@ -1,10 +1,10 @@
-    const express = require("express");
-    const { adminlogin } = require("../Controllers/adminAuthController");
+    import express from "express";
+    import { adminlogin, adminregister, getdata } from "../Controllers/adminAuthController.js"; // 🔁 add `.js`
+
     const route = express.Router();
 
-    route.post("/adminlogin",adminlogin)
-    route.post("/adminregister",(req,res)=>{
+    route.post("/adminlogin", adminlogin);
+    route.post("/adminregister", adminregister);
+    route.post("/getdata", getdata);
 
-    })
-
-    module.exports= route;
+    export default route; // 🔁 instead of module.exports

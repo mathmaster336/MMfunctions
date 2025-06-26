@@ -45,18 +45,19 @@
 // //   res.send("Hello from Firebase!");
 // // });
 // exports.api = onRequest(app);
+import { onRequest } from "firebase-functions/v2/https";
+import logger from "firebase-functions/logger";
+import express from "express";
+import cors from "cors";
 
-const { onRequest } = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
-const express = require("express");
-const cors = require("cors");
-
-const adminauthroute=require("./Routes/adminAuthRoute")
+import adminauthroute from "./Routes/adminAuthRoute.js"; // 👈 Add `.js` at end
 
 // const coureseroutes = require("./Routes/CourseRoutes/Rcourse")
 
 const app = express();
 app.use(cors());
+app.use(express.json());
+
 app.use(express.json());
 
 app.use("/",adminauthroute);
@@ -70,4 +71,4 @@ app.get("/new",(req,res)=>{
 //   res.send("Hello from Firebase!");
 // });
 
-exports.api = onRequest(app);
+export const apiv2 = onRequest(app); // ✅ Correct in ESM
